@@ -1,0 +1,225 @@
+﻿
+
+$.fn.mainSlider = function(options){
+
+        var op = $.extend({
+			'content' : '.slide_vis',  //슬라이드객체클래스
+			'direction' : 'right', 
+			'mdirection' : 'right', 
+			'cnt' : 0, 
+			'width' : 0,
+			'speed' : 300, //모션이동스피드
+			'btnNext' : '.btn_next',  //다음버튼 클래스
+			'btnPrve' : '.btn_prev', //이전버튼 클래스
+			'cmt' : false, //커멘트컨트롤 클래스
+			'auto' : false, //자동슬라이드 사용미사용
+			'autoDelay' : 5000,  //자동슬라이딩 사용시 딜레이
+			'autoBtn' : false, //플레이스탑버튼 클래스 
+			'autoSize' : false, //설정 넓이값이하에서만 오토슬라이드사용
+			'bulit' : false, //블릿 사용미사용
+			'bulitTarget' : '.nav ul', //블릿사용시 클래스
+			'bulitTag' : '<li><a href="javascript:;"></a></li>', //블릿자동생성시 태그 
+			'callStart' : function(){},
+			'callComplete' : function(){}
+        }, options);		
+		return this.each(function(){
+			//if(op[options]) return op[options];
+		var THIS = $(this), 
+			TARGET = $(op.content, THIS).find('li'),
+			TARGETLENGHT = TARGET.length-1,
+			INTER = null,
+			SUPPORTS_TOUCH = 'ontouchstart' in window,
+			SUPPORTS_POINTER_IE10 = window.navigator.msPointerEnabled && !window.navigator.pointerEnabled,
+			SUPPORTS_POINTER = window.navigator.pointerEnabled || window.navigator.msPointerEnabled,
+			useTouchEvents = (SUPPORTS_TOUCH || SUPPORTS_POINTER || !op.fallbackToMouseEvents),
+            START_EV = useTouchEvents ? (SUPPORTS_POINTER ? (SUPPORTS_POINTER_IE10 ? 'MSPointerDown' : 'pointerdown') : 'touchstart') : 'mousedown',
+            MOVE_EV = useTouchEvents ? (SUPPORTS_POINTER ? (SUPPORTS_POINTER_IE10 ? 'MSPointerMove' : 'pointermove') : 'touchmove') : 'mousemove',
+            END_EV = useTouchEvents ? (SUPPORTS_POINTER ? (SUPPORTS_POINTER_IE10 ? 'MSPointerUp' : 'pointerup') : 'touchend') : 'mouseup',
+			startX = endX = startY = 0,
+			reset = true,
+			tstate = false,
+			bTARGET = TARGET.first();
+
+		if(TARGET.length == 0) {
+			$(op.btnNext).hide();
+			$(op.btnPrve).hide();
+			$(op.autoBtn).hide();
+			return false;
+		}
+		if(TARGET.length == 1) {
+			$(op.btnNext).hide();
+			$(op.btnPrve).hide();
+			$(op.autoBtn).hide();
+		}
+		
+		if(op.cmt) {
+			var CMT = $(op.cmt, THIS).find('li');
+		}
+		if(op.bulit) {
+			var BT = $(op.bulitTarget, THIS);				
+		}
+		// index설정
+		if(TARGET.length > 1){
+			TARGET.each(function(i, itm){
+				$(itm).css({'z-index':TARGETLENGHT - i});
+				$(itm).find('a').each(function(j, itm){
+					$(itm).attr('data-index', i);
+				});
+			});
+
+			$(op.btnNext, THIS).on('click', function(){nextMove()});
+			$(op.btnPrve, THIS).on('click', function(e){prevMove()});
+			
+			TARGET.find('a').on('focusin', function(e){
+				clearInterval(INTER), INTER = null;
+				var aIndex = $(this).attr('data-index');
+				if(op.cnt != aIndex){
+					op.cnt = aIndex;
+					op.direction = 'right';
+					slideMotion();
+				}
+			});
+			TARGET.find('a').on('focusout', function(e){
+				if($(op.autoBtn, THIS).hasClass('stop')) autoPlay();
+			});			
+			
+			THIS.on('touchstart', function(e){
+				//e.preventDefault();
+				var orig = e.originalEvent;
+				if(op.auto) clearInterval(INTER), INTER = null;
+				startX = orig.changedTouches[0].pageX;
+				startY = orig.changedTouches[0].pageY;
+			});
+			THIS.on('touchmove', function(e){
+				var orig = e.originalEvent;
+				var moveX = orig.changedTouches[0].pageX;
+				var moveY = orig.changedTouches[0].pageY;
+				var xMovement = Math.abs(moveX - startX);
+				var yMovement = Math.abs(moveY - startY);
+				if(xMovement > yMovement){
+					e.preventDefault();
+					if(startX > moveX) op.mdirection = 'left';
+					else op.mdirection = 'right';
+					slideStep(xMovement);
+					tstate = true;
+				}
+			});
+			THIS.on('touchend', function(e){
+				if(tstate){
+					tstate = false;
+					reset = true;
+					if(op.auto && $(op.autoBtn, THIS).hasClass('stop')) autoPlay();
+					if(op.mdirection == 'left') nextMove();
+					else  prevMove();
+				}
+			});
+
+		}
+			var slideMotion = function(){
+				var drecLeft = '-100%',
+					drecRight = '100%';
+				if(op.direction == 'left') drecLeft  = '100%', drecRight = '-100%';
+				
+				// index 재설정 
+				if(TARGET.length > 1){
+					TARGET.each(function(i, itm){$(itm).css('z-index', $(itm).css('z-index') - 1);	});
+
+					if(!reset) TARGET.eq(op.cnt).css({'left':drecRight, 'z-index':TARGETLENGHT});
+					bTARGET.css({'z-index': TARGETLENGHT-1}).stop().animate({'left':drecLeft}, op.speed);
+					TARGET.eq(op.cnt).stop().animate({'left':'0'},{duration:op.speed, start:function(){op.callStart.call(THIS, op.cnt, op.direction)}, complete:function(){if(op.callComplete) op.callComplete.call(THIS, op.cnt, op.direction)}});
+					bTARGET = TARGET.eq(op.cnt);
+
+					if(op.cmt) CMT.removeClass('on').hide(), CMT.eq(op.cnt).addClass('on').show();
+
+					if(op.bulit) BT.children().removeClass('on').eq(op.cnt).addClass('on');
+					
+					reset = false;
+				}
+			}
+			
+			var slideStep = function(move){
+				var cnt = op.cnt - 1;
+				if(op.mdirection == 'left') cnt = op.cnt + 1;
+				if(cnt < 0) cnt = TARGETLENGHT;
+				else if(cnt > TARGETLENGHT) cnt = 0;
+				if(op.mdirection == 'left'){
+					bTARGET.css({'left':-move});
+					TARGET.eq(cnt).css({'left':op.width-move, 'z-index':TARGETLENGHT});
+				}else{
+					bTARGET.css({'left':move});
+					TARGET.eq(cnt).css({'left':-op.width+move, 'z-index':TARGETLENGHT});
+				}
+			}
+			
+			var nextMove = function(){
+				op.cnt++;
+				if(op.cnt > TARGETLENGHT) op.cnt = 0;
+				op.direction = 'right';
+				slideMotion();				
+			}
+			var prevMove = function(){
+				op.cnt--;
+				if(op.cnt < 0) op.cnt = TARGETLENGHT;
+				op.direction = 'left';
+				slideMotion();				
+			}
+			var autoPlay = function(){
+				if(INTER || !op.auto) return
+				INTER = setInterval(function() {
+				nextMove();}, op.autoDelay);
+				$(op.autoBtn, THIS).removeClass('play').addClass('stop').attr('title', '정지');
+			}
+			//option
+			if(op.auto){
+				THIS.on('mouseenter mouseleave', function(e){
+					if(e.type == 'mouseenter') clearInterval(INTER), INTER = null;
+					else if($(op.autoBtn, THIS).hasClass('stop')) autoPlay();
+				});
+				autoPlay();
+			}
+			if(op.autoBtn && op.auto){
+				$(op.autoBtn, THIS).on('click', function(e){
+					e.preventDefault();
+					if($(this).hasClass('stop')){
+						clearInterval(INTER);
+						INTER = null;
+						$(this).removeClass('stop').addClass('play').attr('title', '재생');
+					}else{
+						autoPlay();
+					} 
+				});
+			}
+			if(op.bulit){
+				TARGET.each(function(i){
+					var btt = $(op.bulitTag).attr('data-index', i);
+					
+					//20160323 링크텍스트 추가
+					var bannerNum = i + 1;
+					var bannerHtmlText = "<span>배너버튼" + bannerNum + "</span>";
+					//20160323 링크텍스트 추가
+					
+					BT.append(btt);
+					btt.find("a").html(bannerHtmlText);
+					btt.on('click', function(){
+						var bulitIndex = $(this).attr('data-index');
+						if(bulitIndex != op.cnt){
+							op.cnt = bulitIndex;
+							op.direction = 'right';
+							slideMotion();
+						}
+					});
+				});
+			}
+			
+			//resize
+			$(window).on('resize',function(){
+				op.width = TARGET.width();
+				if(op.auto && op.autoSize){
+					if($(window).width() < op.autoSize) autoPlay();
+					else clearInterval(INTER), INTER = null;
+				}
+			}).resize();
+			//init
+			slideMotion();
+	});
+};

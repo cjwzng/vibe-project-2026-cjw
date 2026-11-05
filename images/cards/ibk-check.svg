@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 350">
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#80d646"/>
+      <stop offset="1" stop-color="#168e68"/>
+    </linearGradient>
+  </defs>
+  <rect x="14" y="14" width="532" height="322" rx="34" fill="url(#background)"/>
+  <circle cx="430" cy="100" r="105" fill="#fff" fill-opacity=".12"/>
+  <circle cx="488" cy="286" r="128" fill="#fff" fill-opacity=".1"/>
+  <path d="M70 254c79-111 159-139 235-81 67 52 117 44 185-30" fill="none" stroke="#e5ffbd" stroke-width="17" stroke-linecap="round" opacity=".85"/>
+  <rect x="62" y="66" width="72" height="54" rx="10" fill="#d9c07c"/>
+  <path d="M98 66v54M62 93h72" stroke="#947d47" stroke-width="4"/>
+  <text x="64" y="174" fill="#fff" font-family="Arial, sans-serif" font-size="32" font-weight="700">IBK</text>
+  <text x="64" y="308" fill="#fff" font-family="Arial, sans-serif" font-size="21" letter-spacing="3">CHECK</text>
+</svg>

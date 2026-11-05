@@ -1,0 +1,512 @@
+@layer components {
+  .card {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    overflow: hidden;
+    padding: var(--card-padding);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-card);
+  }
+
+  .card-heading {
+    display: flex;
+    min-height: var(--space-8);
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    margin-block-end: var(--space-3);
+  }
+
+  .card h2 {
+    color: var(--color-accent);
+    font-family: var(--font-sans);
+    font-size: var(--fs-lg);
+    font-weight: 700;
+  }
+
+  .card-slider-control {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .slider-arrow {
+    display: inline-flex;
+    width: 22px;
+    height: 22px;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+    color: var(--color-text-muted);
+    font-size: var(--fs-md);
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .slider-arrow:hover {
+    color: var(--color-primary);
+  }
+
+  .card-count {
+    min-width: 0;
+    color: var(--color-text-muted);
+    font-size: var(--fs-xs);
+  }
+
+  /* 1. 추천상품 */
+  .recommendation-card {
+    border-radius: var(--radius-card-prd);
+    text-align: center;
+  }
+
+  .recommendation-card .card-heading h2 a:hover {
+    text-decoration: underline;
+  }
+
+  .recommendation-more {
+    margin-block-start: 0;
+    padding-block-start: 0;
+  }
+
+  .home-recommended-card {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    color: var(--color-text);
+  }
+
+  .home-recommended-card .recommendation-artwork {
+    flex: 1;
+  }
+
+  .home-recommended-card .recommendation-artwork img {
+    width: 100%;
+    max-width: var(--card-shop-image-width);
+    border-radius: var(--radius-notice-panel);
+  }
+
+  .recommendation-card h3 {
+    margin-block: var(--space-1) var(--space-2);
+    color: var(--color-text);
+    font-size: var(--fs-xl);
+    letter-spacing: var(--letter-spacing-card);
+  }
+
+  .recommendation-artwork {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-block: var(--space-2);
+  }
+
+  .recommendation-artwork img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .recommendation-card p {
+    color: var(--color-text);
+    font-size: var(--fs-sm);
+    line-height: var(--line-height-card);
+  }
+
+  .home-recommended-card:hover h3,
+  .home-recommended-card:focus-visible h3 {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  /* 2. 이벤트 */
+  .event-card {
+    border-radius: var(--radius-lg);
+  }
+
+  .event-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  .event-body h3 {
+    margin-block: var(--space-1) var(--space-2);
+    color: var(--color-text);
+    font-size: var(--fs-lg);
+    font-weight: 700;
+  }
+
+  .event-desc {
+    color: var(--color-text-muted);
+    font-size: var(--fs-xs);
+    line-height: var(--line-height-card);
+    word-break: keep-all;
+  }
+
+  .event-artwork {
+    display: flex;
+    flex: 1;
+    min-height: 140px;
+    align-items: flex-end;
+    justify-content: center;
+    margin-block-start: var(--space-3);
+  }
+
+  .event-artwork img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* 3. 알림 */
+  .notices-card {
+    padding-block-end: var(--space-4);
+  }
+
+  .notice-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .notice-list li + li {
+    border-block-start: var(--divider-width) solid var(--color-border-list);
+  }
+
+  .notice-list a {
+    display: flex;
+    min-height: 64px;
+    align-items: center;
+    gap: var(--space-3);
+    padding-block: var(--space-2);
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .notice-icon {
+    display: flex;
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    align-items: center;
+    justify-content: center;
+    border: var(--divider-width) solid var(--color-border);
+    border-radius: var(--radius-pill);
+    background: var(--color-bg);
+    color: var(--color-accent);
+  }
+
+  .notice-copy {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 2px;
+    color: var(--color-text);
+    line-height: var(--line-height-heading);
+  }
+
+  .notice-category {
+    color: var(--color-text-muted);
+    font-size: var(--fs-xs);
+  }
+
+  .notice-copy strong {
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    letter-spacing: var(--letter-spacing-notice);
+    word-break: keep-all;
+  }
+
+  .notice-arrow {
+    color: var(--color-border);
+    font-size: var(--fs-xl);
+    line-height: 1;
+  }
+
+  /* 4. 상품몰 3x3 그리드 */
+  .mall-card {
+    border-radius: var(--radius-lg);
+  }
+
+  .mall-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
+    padding: 0;
+    list-style: none;
+  }
+
+  .mall-list li a {
+    display: flex;
+    height: 80px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    text-decoration: none;
+    transition: background-color var(--duration-fast) var(--ease-standard);
+  }
+
+  .mall-list li a:hover,
+  .mall-list li a:focus-visible {
+    background-color: var(--color-hover-bg);
+  }
+
+  .mall-icon {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text);
+  }
+
+  .mall-name {
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  /* 5. 보도자료, 새소식, 공고 공통 목록 */
+  .board-card,
+  .news-card,
+  .gonggo-card {
+    border-radius: var(--radius-lg);
+  }
+
+  .board-list {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    list-style: none;
+  }
+
+  .board-list li {
+    border-block-start: var(--divider-width) solid var(--color-border-list);
+  }
+
+  .board-list li:first-child {
+    border-block-start: 0;
+  }
+
+  .board-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding-block: var(--space-2);
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .board-item time {
+    color: var(--color-accent);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+  }
+
+  .board-title {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    font-size: var(--fs-sm);
+    line-height: 1.35;
+    word-break: keep-all;
+  }
+
+  .board-item:hover .board-title,
+  .board-item:focus-visible .board-title {
+    text-decoration: underline;
+  }
+
+  .card-more-btn {
+    display: block;
+    margin-block-start: auto;
+    padding-block-start: var(--space-3);
+    color: var(--color-text-muted);
+    font-size: var(--fs-xs);
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .card-more-btn:hover,
+  .card-more-btn:focus-visible {
+    color: var(--color-primary);
+  }
+
+  .recommendation-card .recommendation-more {
+    margin-block-start: 0;
+    padding-block-start: 0;
+  }
+
+  /* 6. ESG경영 & 기업은행 안내 (중앙 정렬 + 하단 일러스트) */
+  .esg-card,
+  .intro-card {
+    min-height: 300px;
+    border-radius: var(--radius-lg);
+    text-align: center;
+  }
+
+  .card-center-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+    margin-block-end: var(--space-2);
+  }
+
+  .esg-title,
+  .intro-title {
+    color: var(--color-text) !important;
+    font-family: var(--font-heading);
+    font-size: var(--fs-lg) !important;
+    font-weight: 700;
+  }
+
+  .esg-sub,
+  .intro-sub {
+    color: var(--color-text-muted);
+    font-size: var(--fs-xs);
+    line-height: 1.45;
+    word-break: keep-all;
+  }
+
+  .card-illustration-wrap {
+    display: flex;
+    flex: 1;
+    align-items: flex-end;
+    justify-content: center;
+    margin-block-start: auto;
+  }
+
+  .card-illustration-wrap img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* 7. 기타 서비스 링크 */
+  .quick-links-card {
+    min-height: 200px;
+    justify-content: center;
+    padding: var(--space-6) var(--space-8);
+    border-radius: var(--radius-lg);
+  }
+
+  .quick-links-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: 0;
+    list-style: none;
+  }
+
+  .quick-links-list li a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: var(--color-text);
+    font-size: var(--fs-sm);
+    text-decoration: none;
+  }
+
+  .quick-links-list li a::before {
+    margin-inline-end: var(--space-2);
+    color: var(--color-accent);
+    content: "•";
+    font-size: var(--fs-md);
+  }
+
+  .quick-links-list li a:hover,
+  .quick-links-list li a:focus-visible {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  /* 8. IBK창공 */
+  .changgong-card {
+    min-height: 180px;
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
+
+  .changgong-card h2 {
+    color: var(--color-text);
+    font-family: var(--font-heading);
+    font-size: var(--fs-lg);
+    font-weight: 700;
+  }
+
+  .changgong-link {
+    display: block;
+    width: 100%;
+    height: 100px;
+    border-radius: var(--radius-md);
+    background: url('../../images/used/bg_changgong.png') no-repeat center center / cover;
+  }
+
+  /* 데스크톱 (769px 이상) 3열 그리드 배치 */
+  @media (min-width: 769px) {
+    .dashboard-grid {
+      display: grid;
+      width: 100%;
+      grid-template-columns: repeat(3, var(--card-width));
+      align-items: start;
+      justify-content: center;
+      gap: var(--dashboard-gap);
+    }
+
+    /* 1열 (Left) */
+    .recommendation-card { grid-column: 1; grid-row: 1; }
+    .board-card          { grid-column: 1; grid-row: 2; }
+    .esg-card            { grid-column: 1; grid-row: 3; }
+    .changgong-card      { grid-column: 1; grid-row: 4; }
+
+    /* 2열 (Center) */
+    .event-card          { grid-column: 2; grid-row: 1; }
+    .mall-card           { grid-column: 2; grid-row: 2; }
+    .gonggo-card         { grid-column: 2; grid-row: 3; }
+
+    /* 3열 (Right) */
+    .notices-card        { grid-column: 3; grid-row: 1; }
+    .news-card           { grid-column: 3; grid-row: 2; }
+    .intro-card          { grid-column: 3; grid-row: 3; }
+    .quick-links-card    { grid-column: 3; grid-row: 4; }
+  }
+
+  /* 모바일 (768px 이하) 1열 단일 스택 */
+  @media (max-width: 768px) {
+    .dashboard-grid {
+      display: flex;
+      flex-direction: column;
+      gap: var(--partition-gap);
+    }
+
+    .card {
+      padding: var(--space-6);
+    }
+
+    .recommendation-card,
+    .board-card {
+      border-radius: var(--radius-lg);
+    }
+
+    /* 모바일 표시 순서: 이벤트 -> 알림 -> 상품몰 순 최상단 */
+    .event-card          { order: 1; }
+    .notices-card        { order: 2; }
+    .mall-card           { order: 3; }
+    .recommendation-card { order: 4; }
+    .board-card          { order: 5; }
+    .gonggo-card         { order: 6; }
+    .news-card           { order: 7; }
+    .esg-card            { order: 8; }
+    .intro-card          { order: 9; }
+    .quick-links-card    { order: 10; }
+    .changgong-card      { order: 11; }
+  }
+}

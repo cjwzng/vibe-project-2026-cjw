@@ -1,0 +1,23 @@
+[
+  {
+    "id": "ibk-everyday",
+    "name": "IBK Everyday 신용카드",
+    "image": "images/cards/ibk-everyday.svg",
+    "annualFee": "15,000원 (샘플)",
+    "description": "일상 소비 혜택을 담은 추천 신용카드입니다."
+  },
+  {
+    "id": "ibk-check",
+    "name": "IBK Everyday 체크카드",
+    "image": "images/cards/ibk-check.svg",
+    "annualFee": "연회비 없음 (샘플)",
+    "description": "간편하게 사용할 수 있는 추천 체크카드입니다."
+  },
+  {
+    "id": "ibk-mileage",
+    "name": "IBK Mileage 카드",
+    "image": "images/cards/ibk-mileage.svg",
+    "annualFee": "18,000원 (샘플)",
+    "description": "마일리지 적립을 위한 추천 카드입니다."
+  }
+]

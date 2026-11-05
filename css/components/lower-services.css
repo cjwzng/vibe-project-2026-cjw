@@ -1,0 +1,196 @@
+@layer components {
+  .lower-services {
+    padding-block: var(--space-10);
+    background: var(--color-bg);
+  }
+
+  .lower-services-content {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--lower-services-gap);
+  }
+
+  .app-shortcuts {
+    flex: 1 1 540px;
+    min-width: 0;
+  }
+
+  .app-shortcuts ul {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .app-shortcuts li {
+    min-width: 0;
+    text-align: center;
+  }
+
+  .app-shortcuts a {
+    display: flex;
+    min-height: 170px;
+    flex-direction: column;
+    align-items: center;
+    padding-block-start: var(--space-4);
+    color: var(--color-text);
+    line-height: var(--line-height-card);
+  }
+
+  .app-icon {
+    display: flex;
+    width: var(--app-icon-size);
+    height: var(--app-icon-size);
+    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-block-end: var(--space-8);
+    border: var(--divider-width) solid var(--color-border);
+    border-radius: var(--radius-app-icon);
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    line-height: 1;
+  }
+
+  .app-icon--business {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: var(--color-bg);
+  }
+
+  .app-icon-wordmark {
+    font-size: var(--fs-md);
+    letter-spacing: -0.06em;
+  }
+
+  .app-icon--business .app-icon-wordmark {
+    font-size: var(--fs-lg);
+  }
+
+  .app-icon-tag {
+    margin-block-start: var(--space-1);
+    padding: 1px var(--space-1);
+    border-radius: var(--radius-pill);
+    background: var(--color-bg);
+    color: var(--color-primary);
+    font-size: var(--fs-xs);
+  }
+
+  .app-icon-caption {
+    margin-block-start: var(--space-1);
+    font-size: 0.625rem;
+  }
+
+  .app-icon-card-label {
+    margin-block-start: var(--space-1);
+    padding-inline: var(--space-1);
+    transform: rotate(-8deg);
+    background: var(--color-primary);
+    color: var(--color-bg);
+    font-size: var(--fs-xs);
+    letter-spacing: 0.08em;
+  }
+
+  .app-shortcut-label {
+    font-size: var(--fs-sm);
+    text-align: center;
+  }
+
+  .video-list {
+    display: grid;
+    flex: 0 1 415px;
+    grid-template-columns: repeat(2, minmax(0, var(--video-thumbnail-width)));
+    gap: var(--video-thumbnail-gap);
+  }
+
+  .video-list a {
+    display: block;
+    color: var(--color-text);
+    line-height: var(--line-height-card);
+    text-align: center;
+  }
+
+  .video-thumbnail {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+
+  .video-thumbnail img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-title {
+    display: block;
+    margin-block-start: var(--space-3);
+    font-size: var(--fs-sm);
+  }
+
+  @media (max-width: 768px) {
+    .lower-services-content {
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    .app-shortcuts {
+      width: 100%;
+      flex: 0 0 auto;
+    }
+
+    .app-shortcuts a {
+      min-height: 0;
+      padding-block-start: 0;
+    }
+
+    .app-icon {
+      width: var(--app-icon-size-mobile);
+      height: var(--app-icon-size-mobile);
+      margin-block-end: var(--space-2);
+      border-radius: var(--radius-app-icon);
+    }
+
+    .app-icon-wordmark {
+      font-size: var(--fs-sm);
+    }
+
+    .app-icon--business .app-icon-wordmark {
+      font-size: var(--fs-sm);
+    }
+
+    .app-icon-tag {
+      margin-block-start: 2px;
+      padding-inline: 3px;
+      font-size: 0.625rem;
+    }
+
+    .app-icon-caption {
+      margin-block-start: 2px;
+      font-size: 0.5rem;
+    }
+
+    .app-icon-card-label {
+      margin-block-start: 2px;
+      padding-inline: 2px;
+      font-size: 0.625rem;
+    }
+
+    .app-shortcut-label {
+      font-size: var(--fs-xs);
+    }
+
+    .video-list {
+      width: 100%;
+      flex: 0 0 auto;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--video-thumbnail-gap-mobile);
+    }
+
+    .video-title {
+      margin-block-start: var(--space-2);
+      font-size: var(--fs-xs);
+    }
+  }
+}

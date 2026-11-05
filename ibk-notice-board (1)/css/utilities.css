@@ -1,0 +1,12 @@
+@layer utilities {
+  .text-link:hover,
+  .board-item:hover,
+  .notice-list a:hover {
+    color: var(--color-primary);
+  }
+
+  .board-item:hover,
+  .notice-list a:hover {
+    background: var(--color-hover-bg);
+  }
+}

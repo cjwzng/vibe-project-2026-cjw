@@ -1,0 +1,478 @@
+@layer components {
+  body.search-modal-open {
+    overflow: hidden;
+  }
+
+  /* 1. 상단 헤더 검색 폼 및 버튼 스타일 보완 */
+  .site-search {
+    display: flex;
+    align-items: center;
+  }
+
+  .search-button.search-modal-open-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .search-button.search-modal-open-btn img {
+    display: block;
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+  }
+
+  /* 2. 통합검색 전체 화면 고정 레이어 (fixed) */
+  .search-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-search-modal);
+    width: 100vw;
+    height: 100vh;
+    overflow-y: auto;
+    background-color: #ffffff;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--duration-base) var(--ease-standard),
+                visibility var(--duration-base) var(--ease-standard);
+  }
+
+  .search-modal-overlay[hidden] {
+    display: none;
+  }
+
+  .search-modal-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .search-modal-container {
+    display: flex;
+    width: 100%;
+    min-height: 100%;
+    flex-direction: column;
+    background-color: #ffffff;
+  }
+
+  /* 상단 헤더 */
+  .search-modal-header {
+    width: 100%;
+    border-block-end: 2px solid var(--color-primary);
+    background-color: #ffffff;
+  }
+
+  .search-modal-header-inner {
+    display: flex;
+    max-width: 1100px;
+    min-height: 52px;
+    margin-inline: auto;
+    padding-inline: var(--space-4);
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+
+  .search-modal-brand a {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    text-decoration: none;
+  }
+
+  .search-modal-brand .brand-mark {
+    display: inline-flex;
+    width: 32px;
+    height: 22px;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    background: var(--color-primary);
+    color: #ffffff;
+    font-size: var(--fs-xs);
+    font-weight: 700;
+  }
+
+  .search-modal-brand .brand-name {
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    font-size: var(--fs-lg);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  .search-modal-util-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .search-modal-util-nav a {
+    color: var(--color-text-muted);
+    font-size: var(--fs-xs);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .search-modal-util-nav a:hover,
+  .search-modal-util-nav a:focus-visible {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .search-modal-top-search {
+    display: flex;
+    width: 160px;
+    height: 26px;
+    align-items: center;
+    padding-inline: var(--space-2);
+    border: 1px solid #c0c6cc;
+    border-radius: 2px;
+    background-color: #ffffff;
+  }
+
+  .search-modal-mini-input {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    font-size: var(--fs-xs);
+    outline: none;
+  }
+
+  .search-modal-mini-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .search-modal-close-btn {
+    display: inline-flex;
+    min-width: 32px;
+    min-height: 32px;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  /* GNB 네비게이션 */
+  .search-modal-gnb {
+    width: 100%;
+    border-block-start: 1px solid #e5e9ec;
+    background-color: #fcfdfe;
+  }
+
+  .search-modal-gnb-inner {
+    display: flex;
+    max-width: 1100px;
+    height: 44px;
+    margin-inline: auto;
+    padding-inline: var(--space-4);
+    align-items: center;
+    gap: var(--space-8);
+  }
+
+  .search-modal-gnb-inner a {
+    color: var(--color-text);
+    font-family: var(--font-heading);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .search-modal-gnb-inner a:hover,
+  .search-modal-gnb-inner a:focus-visible {
+    color: var(--color-primary);
+  }
+
+  .search-modal-allmenu {
+    margin-inline-start: auto;
+    color: var(--color-text-muted);
+    font-size: var(--fs-xs);
+    cursor: default;
+  }
+
+  /* 메인 콘텐츠 영역 */
+  .search-modal-main {
+    flex: 1;
+    width: 100%;
+    padding-block: var(--space-8) var(--space-16);
+  }
+
+  .search-modal-content-inner {
+    max-width: 960px;
+    margin-inline: auto;
+    padding-inline: var(--space-4);
+  }
+
+  .search-modal-title {
+    margin-block-end: var(--space-6);
+    color: #1e70ba;
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+  }
+
+  /* 상단 검색창 박스 */
+  .search-input-box {
+    margin-block-end: var(--space-8);
+    padding: var(--space-6) var(--space-6);
+    border: 1px solid #d8dee4;
+    border-radius: var(--radius-sm);
+    background-color: #fafbfc;
+  }
+
+  .search-input-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .search-category-select {
+    height: 38px;
+    padding-inline: var(--space-2) var(--space-4);
+    border: 1px solid #bdc5cd;
+    border-radius: 2px;
+    background-color: #ffffff;
+    color: var(--color-text);
+    font-size: var(--fs-sm);
+  }
+
+  .search-field-wrap {
+    position: relative;
+    display: flex;
+    flex: 1;
+    align-items: center;
+  }
+
+  .search-main-input {
+    width: 100%;
+    height: 38px;
+    padding-inline: var(--space-3) var(--space-8);
+    border: 1px solid #bdc5cd;
+    border-radius: 2px;
+    background-color: #ffffff;
+    font-size: var(--fs-md);
+  }
+
+  .search-dropdown-arrow {
+    position: absolute;
+    inset-inline-end: 8px;
+    border: 0;
+    background: transparent;
+    color: var(--color-text-muted);
+    font-size: 10px;
+    cursor: pointer;
+  }
+
+  .search-submit-btn {
+    min-width: 68px;
+    height: 38px;
+    padding-inline: var(--space-4);
+    border: 1px solid #eab308;
+    border-radius: 2px;
+    background: #facc15;
+    color: #333333;
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .search-submit-btn:hover {
+    background: #eab308;
+  }
+
+  .search-options-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    margin-block-start: var(--space-3);
+    font-size: var(--fs-xs);
+    color: var(--color-text-muted);
+  }
+
+  .search-checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    cursor: pointer;
+  }
+
+  .search-help-btn {
+    margin-inline-start: auto;
+    padding: var(--space-1) var(--space-3);
+    border: 1px solid #bdc5cd;
+    border-radius: 2px;
+    background-color: #ffffff;
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: var(--fs-xs);
+  }
+
+  .search-help-btn:hover {
+    background-color: #f1f5f9;
+  }
+
+  /* 검색 탭 */
+  .search-tabs {
+    display: flex;
+    border-block-end: 2px solid #1e70ba;
+    margin-block-end: var(--space-5);
+  }
+
+  .search-tab {
+    padding: 10px 18px;
+    border: 1px solid #d4d9de;
+    border-block-end: 0;
+    background-color: #f7f9fa;
+    color: var(--color-text);
+    font-size: var(--fs-sm);
+    cursor: pointer;
+  }
+
+  .search-tab + .search-tab {
+    border-inline-start: 0;
+  }
+
+  .search-tab.is-active {
+    position: relative;
+    border-color: #1e70ba;
+    border-block-start: 2px solid #1e70ba;
+    background-color: #ffffff;
+    color: #1e70ba;
+    font-weight: 700;
+  }
+
+  .search-summary-text {
+    margin-block-end: var(--space-6);
+    color: var(--color-text);
+    font-size: var(--fs-sm);
+  }
+
+  .search-query-highlight {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .search-count-highlight {
+    color: #1e70ba;
+  }
+
+  /* 검색 결과 없음 카드 */
+  .search-no-result-card {
+    margin-block-end: var(--space-8);
+    padding: var(--space-10) var(--space-12);
+    border: 1px solid #e1e7ec;
+    border-radius: var(--radius-md);
+    background-color: #ffffff;
+  }
+
+  .search-no-result-top {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    margin-block-end: var(--space-8);
+  }
+
+  .search-no-result-icon {
+    flex: 0 0 84px;
+  }
+
+  .search-no-result-message h2 {
+    margin-block-end: var(--space-2);
+    color: var(--color-text);
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  .search-no-result-message p {
+    color: var(--color-text-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .search-no-result-tips {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-block-start: var(--space-6);
+    border-block-start: 1px dashed #dce2e8;
+    color: var(--color-text-muted);
+    font-size: var(--fs-xs);
+    line-height: 1.6;
+  }
+
+  .search-no-result-tips strong {
+    color: var(--color-text);
+  }
+
+  /* 하단 재검색 상자 */
+  .search-bottom-box {
+    padding: var(--space-5) var(--space-6);
+    border: 1px solid #d8dee4;
+    border-radius: var(--radius-sm);
+    background-color: #fafbfc;
+  }
+
+  .search-bottom-input {
+    flex: 1;
+    height: 38px;
+    padding-inline: var(--space-3);
+    border: 1px solid #bdc5cd;
+    border-radius: 2px;
+    background-color: #ffffff;
+    font-size: var(--fs-md);
+  }
+
+  /* 모바일 반응형 처리 */
+  @media (max-width: 768px) {
+    .search-modal-header-inner {
+      flex-wrap: wrap;
+      padding-block: var(--space-2);
+    }
+
+    .search-modal-util-nav,
+    .search-modal-top-search,
+    .search-modal-allmenu {
+      display: none;
+    }
+
+    .search-modal-gnb-inner {
+      overflow-x: auto;
+      gap: var(--space-4);
+    }
+
+    .search-tabs {
+      overflow-x: auto;
+    }
+
+    .search-tab {
+      white-space: nowrap;
+      padding: 8px 12px;
+    }
+
+    .search-no-result-top {
+      flex-direction: column;
+      text-align: center;
+      gap: var(--space-4);
+    }
+
+    .search-input-row {
+      flex-wrap: wrap;
+    }
+
+    .search-category-select,
+    .search-field-wrap,
+    .search-submit-btn,
+    .search-bottom-input {
+      width: 100%;
+    }
+  }
+}

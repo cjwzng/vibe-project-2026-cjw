@@ -1,0 +1,78 @@
+/**
+ * 
+ */
+//-- CCMEDIA SERVICE MOBILE APP TAG for Hybrid APP.
+//-- Copyright 2014 CCMEDIA, All Rights Reserved.
+
+var tag_mapp = {
+		
+		_BT_TRK :  "/tag.jsp",
+		_BT_DEBUG_ : "off",				//DEBUG default "on"
+		_bt_run_track : function(param) {
+			
+				try {
+						if(param == null){
+							param = {};
+						}
+					
+						console.log("param :: " + JSON.stringify(param));
+						
+						var _BT_dim	= "&tagtype=1&scr=" + window.screen.width+'x'+window.screen.height;
+						var _BT_ref		= this._BT_getref ();
+						var _BT_time	= this._BT_getcurtime();
+						//var _BT_ret		=  this._BT_TRK + "?tz=" +  _BT_time + _BT_dim + "&ref=" + escape ( _BT_ref ) + "&url=" + escape(document.location) + "&urlex=" + escape(param.url==null?"":param.url);
+						var _BT_ret		=  this._BT_TRK + "?tz=" +  _BT_time + _BT_dim + "&url=" + escape(document.location);
+
+						
+						for(key in param){
+							_BT_ret += "&" + key + "=" + param[key];
+						}
+						
+						var img = new Image ();	
+						img.src = _BT_ret;
+						img.onload = function () { return;};
+	//				if ( typeof(_BT_DEBUG_) !="undefined" && _BT_DEBUG_ == "on" ) alert ( _BT_ret);		//TODO : 추후 적용
+				} catch (error) {
+						console.log("error message : " + error.message);
+				}
+		},
+		
+		_BT_getcurtime : function  () {
+				var sdate		= new Date();
+				var iday		= sdate.getDate();
+				var imon		= sdate.getMonth() + 1;
+				var iyea		= sdate.getFullYear();
+				var ihour		= sdate.getHours ();
+				var imin		= sdate.getMinutes ();
+				var isec		= sdate.getSeconds ();
+				var szret;
+			  	if(iday < 10) iday = '0' + iday;
+			  	if(imon < 10) imon = '0' + imon;
+			  	szret = iyea + "" + imon + "" + iday + (( ihour < 10) ? "0" : "" )  + ihour + (( imin < 10) ? "0" : "" ) + imin + (( isec < 10) ? "0" : "" ) + isec;
+			  	return szret;
+		},
+
+		_BT_getref : function  () {
+				var v_ref = document.referrer;
+				if( (v_ref=='undefined')||( v_ref == '' )) {
+						eval(" try{ v_ref = parent.document.referrer ;}catch( _error){ v_ref = '';}");
+				}
+				return v_ref;
+		}
+
+//		_BT_get_simple_tag : function  () {
+//				var _BT_dim	= "&tagtype=1&scr=" + window.screen.width+'x'+window.screen.height;
+//				var _BT_ref		= this._BT_getref ();
+//				var _BT_time	= this._BT_getcurtime();
+//				var _BT_ret		=  _BT_TRK + "?tz=" +  _BT_time + _BT_dim + "&ref=" + escape ( _BT_ref ) + "&url=" + escape(document.location);
+//				return _BT_ret;
+//		}
+		
+};
+
+
+
+
+
+
+

@@ -1,0 +1,125 @@
+@layer reset, base, layout, components, utilities;
+
+@import url("./tokens.css");
+@import url("./base.css");
+@import url("./layout.css");
+@import url("./components/header.css");
+@import url("./components/global-menu.css");
+@import url("./components/hero.css");
+@import url("./components/service-nav.css");
+@import url("./components/card.css");
+@import url("./components/lower-services.css");
+@import url("./components/notice-announcement.css");
+@import url("./components/notice-board.css");
+@import url("./components/card-shop.css");
+@import url("./components/search-modal.css");
+@import url("./utilities.css");
+
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@layer components {
+  .hero-section > .inner-box {
+    padding-block: var(--visual-padding-block-start) var(--visual-padding-block-end);
+  }
+}
+
+@layer layout {
+  .site-footer {
+    padding-block: var(--space-6) var(--space-8);
+    border-block-start: var(--divider-width) solid var(--color-border-header);
+    background: var(--color-surface-alt);
+  }
+}
+
+@layer components {
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-6);
+    padding-block-end: var(--space-5);
+    border-block-end: var(--divider-width) solid var(--color-border);
+    font-size: var(--fs-xs);
+  }
+
+  .footer-links a {
+    color: var(--color-text-muted);
+  }
+
+  .footer-links .footer-link--emphasis {
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+  }
+
+  .footer-content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-6);
+    padding-block-start: var(--space-5);
+    font-size: var(--fs-sm);
+  }
+
+  .footer-brand {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+  }
+
+  .footer-brand-mark {
+    display: grid;
+    width: var(--space-8);
+    height: var(--space-8);
+    place-items: center;
+    border-radius: var(--space-1);
+    background: var(--color-primary);
+    color: var(--color-bg);
+    font-size: var(--fs-xs);
+  }
+
+  .footer-information {
+    display: grid;
+    gap: var(--space-1);
+    color: var(--color-text-muted);
+    font-size: var(--fs-xs);
+    text-align: end;
+  }
+
+  .footer-information small {
+    color: var(--color-text-muted);
+  }
+}
+
+@media (max-width: 768px) {
+  @layer components {
+    .hero-section > .inner-box {
+      padding-block: var(--visual-padding-block-start) var(--space-5);
+    }
+  }
+
+  @layer layout {
+    .service-section {
+      padding-block-start: var(--service-padding-block-mobile);
+    }
+  }
+
+  @layer components {
+    .footer-content {
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .footer-information {
+      text-align: start;
+    }
+  }
+}
